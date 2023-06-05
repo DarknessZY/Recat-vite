@@ -2,7 +2,6 @@
   "name": "recat-vite",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -15,6 +14,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
     "@types/node": "^20.2.5",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
@@ -28,9 +29,26 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-plugin-eslint": "^1.8.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,tsx,ts}": [
+      "npm run lint"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,less,styl,html}": [
+      "prettier --write"
+    ]
   }
 }
