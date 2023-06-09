@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { Button, Layout, Menu } from 'antd'
+import { Layout, Menu } from 'antd'
 import type { MenuProps } from 'antd'
-
+import HeaderLayout from './header'
+import reactImg from '@/assets/react.svg'
 const { Header, Sider, Content } = Layout
 const items: MenuProps['items'] = [
   {
-    label: 'home',
+    label: '首页',
     path: '/home'
   },
   {
-    label: 'about',
+    label: '关于',
     path: '/about'
   }
 ].map((nav) => ({
@@ -26,18 +27,33 @@ const BasicLayout = () => {
   const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key)
   }
-
+  const handleCollapsed = () => {
+    setCollapsed(!collapsed)
+  }
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ height: '100vh', width: '100vh' }}>
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
         <div
           style={{
             height: 32,
             margin: 16,
-            background: 'rgba(0, 0, 0, 0.2)',
-            zIndex: 200
+            display: 'flex',
+            justifyContent: 'center'
           }}
-        />
+        >
+          <img src={reactImg} alt="" />
+          {!collapsed && (
+            <div
+              style={{
+                fontSize: 20,
+                color: '#00d8ff',
+                fontWeight: 500
+              }}
+            >
+              React
+            </div>
+          )}
+        </div>
         <Menu
           mode="inline"
           defaultSelectedKeys={[pathname]}
@@ -47,11 +63,9 @@ const BasicLayout = () => {
       </Sider>
       <Layout style={{ display: 'flex', flexDirection: 'column' }}>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <Button type="text" onClick={() => setCollapsed(!collapsed)}>
-            collapsed
-          </Button>
+          <HeaderLayout collapsed={collapsed} onClick={handleCollapsed} />
         </Header>
-        <Content style={{ padding: '16px', flex: 1, overflowY: 'auto' }}>
+        <Content style={{ flex: 1, padding: 10 }}>
           <Outlet />
         </Content>
       </Layout>
