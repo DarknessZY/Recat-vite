@@ -10,30 +10,35 @@ const Header = (props: { collapsed: any; onClick: any }) => {
   const location = useLocation()
   console.log('location', location)
 
+  const breadcrumbNameMap: Record<string, string> = {
+    '/': '首页',
+    '/home': '首页',
+    '/about': '关于',
+    '/about/study': '学习'
+  }
   /** 解析路径信息并生成面板屑导航*/
-  const pathSnippeets = location.pathname.split('/').filter((i) => i)
-  console.log('pathSnippeets', pathSnippeets)
-  const breadcrumbItems = pathSnippeets.map((_item, index) => {
-    const url = `/${pathSnippeets.slice(0, index + 1).join('/')}`
-    return (
-      <Breadcrumb.Item key={index}>
-        <Link to={url}>{_item}</Link>
-      </Breadcrumb.Item>
-    )
+  const pathSnippets = location.pathname.split('/').filter((i) => i)
+  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`
+    return {
+      key: url,
+      title: <Link to={url}>{breadcrumbNameMap[url]}</Link>
+    }
   })
-  /** 添加首页链接*/
-  breadcrumbItems.unshift(
-    <Breadcrumb.Item key="home">
-      <Link to="/">home</Link>
-    </Breadcrumb.Item>
-  )
+  const breadcrumbItems = [
+    {
+      title: <Link to="/">首页</Link>,
+      key: 'home'
+    }
+  ].concat(extraBreadcrumbItems)
+
   return (
     <div className={styles.content}>
       <div onClick={onClick}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </div>
       <div>
-        <Breadcrumb style={{ margin: '16px 0' }}>{breadcrumbItems}</Breadcrumb>
+        <Breadcrumb items={breadcrumbItems} />
       </div>
     </div>
   )

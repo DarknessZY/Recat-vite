@@ -5,6 +5,7 @@ import styles from './index.module.scss'
 
 const login = () => {
   const navigate = useNavigate()
+  console.log('我是登录')
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values)

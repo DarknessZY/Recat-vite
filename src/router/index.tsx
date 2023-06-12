@@ -1,30 +1,47 @@
 import { lazy } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
+
 import lazyLoad from './lazyLoad'
 import Layout from '@/layouts/index'
+import Login from '@/views/login'
 
 const Home = lazy(() => import('@/views/home'))
-const About = lazy(() => import('@/views/about'))
+const About = lazy(() => import('@/views/aboutMy/about'))
+const Study = lazy(() => import('@/views/aboutMy/study'))
 const routes: RouteObject[] = [
   {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/home" replace />
-      },
-      {
-        path: 'home',
-        element: lazyLoad(Home)
-      },
-      {
-        path: 'about',
-        element: lazyLoad(About)
-      }
-    ]
+    path: '/login',
+    element: <Login />
   }
+  // {
+  //   path: '/',
+  //   element: <Layout />,
+  //   children: [
+  //     {
+  //       index: true,
+  //       element: <Navigate to="/home" replace />
+  //     },
+  //     {
+  //       path: 'home',
+  //       element: lazyLoad(Home)
+  //     },
+  //     {
+  //       path: 'about',
+  //       element: lazyLoad(About),
+  //       children: [
+  //         {
+  //           index: true,
+  //           element: <Navigate to="/about/study" replace />
+  //         },
+  //         {
+  //           path: 'study',
+  //           element: lazyLoad(Study)
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ]
 
 export default createBrowserRouter(routes, {
