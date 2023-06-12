@@ -14,6 +14,7 @@ const Header = (props: { collapsed: any; onClick: any }) => {
     '/': '首页',
     '/home': '首页',
     '/about': '关于',
+    '/about/aboutMy': '关于我',
     '/about/study': '学习'
   }
   /** 解析路径信息并生成面板屑导航*/

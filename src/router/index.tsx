@@ -13,35 +13,38 @@ const routes: RouteObject[] = [
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/home" replace />
+      },
+      {
+        path: 'home',
+        element: lazyLoad(Home)
+      },
+      {
+        path: '/about',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/about/study" replace />
+          },
+          {
+            path: 'study',
+            element: lazyLoad(Study)
+          },
+          {
+            path: 'aboutMy',
+            element: lazyLoad(About)
+          }
+        ]
+      }
+    ]
   }
-  // {
-  //   path: '/',
-  //   element: <Layout />,
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <Navigate to="/home" replace />
-  //     },
-  //     {
-  //       path: 'home',
-  //       element: lazyLoad(Home)
-  //     },
-  //     {
-  //       path: 'about',
-  //       element: lazyLoad(About),
-  //       children: [
-  //         {
-  //           index: true,
-  //           element: <Navigate to="/about/study" replace />
-  //         },
-  //         {
-  //           path: 'study',
-  //           element: lazyLoad(Study)
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 ]
 
 export default createBrowserRouter(routes, {

@@ -11,8 +11,6 @@ const BasicLayout = () => {
   const handleCollapsed = () => {
     setCollapsed(!collapsed)
   }
-  console.log('我是headerLAY')
-
   return (
     <Layout style={{ height: '100vh', width: '100vh' }}>
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light">

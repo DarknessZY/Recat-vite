@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom'
 const menuData = [
   {
     path: '/',
-    key: '/',
+    key: '/home',
     label: '首页'
   },
   {
-    key: '关于',
+    key: '/about',
     label: '关于',
     children: [
       {
-        path: '/about',
-        key: '/about',
-        label: 'about'
+        path: '/about/aboutMy',
+        key: '/about/aboutMy',
+        label: '关于我'
       },
       {
         path: '/about/study',
