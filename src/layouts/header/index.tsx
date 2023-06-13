@@ -8,7 +8,6 @@ const Header = (props: { collapsed: any; onClick: any }) => {
   const { collapsed, onClick } = props
   /** 获取当前页面的路径信息*/
   const location = useLocation()
-  console.log('location', location)
 
   const breadcrumbNameMap: Record<string, string> = {
     '/': '首页',

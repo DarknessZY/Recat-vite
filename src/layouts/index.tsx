@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import Siderbar from './menu/index'
 import HeaderLayout from './header'
+import useWindowSize from '@/hooks/useWindowSize'
 import reactImg from '@/assets/react.svg'
 const { Header, Sider, Content } = Layout
 
@@ -11,8 +12,18 @@ const BasicLayout = () => {
   const handleCollapsed = () => {
     setCollapsed(!collapsed)
   }
+  const { width } = useWindowSize()
+
+  useEffect(() => {
+    if (width < 720) {
+      setCollapsed(true)
+    } else {
+      setCollapsed(false)
+    }
+  }, [width])
+
   return (
-    <Layout style={{ height: '100vh', width: '100vh' }}>
+    <Layout style={{ height: '100vh', width: '100%' }}>
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
         <div
           style={{
