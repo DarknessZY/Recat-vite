@@ -1,15 +1,18 @@
 import { Menu, MenuProps } from 'antd'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { HomeOutlined, UserAddOutlined } from '@ant-design/icons'
 const menuData = [
   {
     path: '/',
     key: '/home',
-    label: '首页'
+    label: '首页',
+    icon: <HomeOutlined />
   },
   {
     key: '/about',
     label: '关于',
+    icon: <UserAddOutlined />,
     children: [
       {
         path: '/about/aboutMy',
@@ -47,6 +50,10 @@ const Siderbar = () => {
     setSelectedKeys([key])
     navigate(key)
   }
+  const location = useLocation()
+  useEffect(() => {
+    setSelectedKeys([location.pathname])
+  }, [location])
   return (
     <Menu
       mode="inline"
