@@ -1,7 +1,17 @@
 .content {
   display: flex;
   align-items: center;
-  justify-content: start;
-  font-size: 20px;
+  justify-content: space-between;
+  font-size: 25px;
   margin-left: 10px;
+
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .right {
+    margin-right: 10px;
+  }
 }

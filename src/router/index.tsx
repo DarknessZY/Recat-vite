@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router-dom'
 
 import lazyLoad from './lazyLoad'
 import Layout from '@/layouts/index'
+import IsloginStatus from '@/components/auth/loginStatus'
 import Login from '@/views/login'
 
 const Home = lazy(() => import('@/views/home'))
@@ -16,14 +17,18 @@ const routes: RouteObject[] = [
   },
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <IsloginStatus>
+        <Layout />
+      </IsloginStatus>
+    ),
     children: [
       {
         index: true,
         element: <Navigate to="/home" replace />
       },
       {
-        path: 'home',
+        path: '/home',
         element: lazyLoad(Home)
       },
       {
