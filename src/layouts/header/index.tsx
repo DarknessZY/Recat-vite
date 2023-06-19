@@ -32,7 +32,7 @@ const Header = (props: { collapsed: any; onClick: any }) => {
   /** 向面包屑添加首页导航*/
   const breadcrumbItems = [
     {
-      title: <Link to="/">首页</Link>,
+      title: <Link to="/home">首页</Link>,
       key: 'home'
     }
   ].concat(extraBreadcrumbItems)
