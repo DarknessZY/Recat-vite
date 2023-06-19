@@ -21,5 +21,13 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
       '@utils': path.resolve(__dirname, 'src/utils')
     }
+  },
+  server: {
+    proxy: {
+      '/new': {
+        target: 'http://www.ggapi.cn/api',
+        changeOrigin: true
+      }
+    }
   }
 })

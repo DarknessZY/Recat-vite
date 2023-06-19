@@ -42,11 +42,11 @@ class Request {
         const url = response.config.url || ''
         this.abortControllerMap.delete(url)
 
-        if (response.data.code !== 1000) {
+        if (response.data.code !== 200) {
           return Promise.reject(response.data)
+        } else {
+          return Promise.resolve(response.data)
         }
-
-        return response.data
       },
       (err) => {
         if (err.response?.status === 401) {
