@@ -25,11 +25,7 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />
-      },
-      {
-        path: '/login',
-        element: <Login />
+        element: <Navigate to="/home" replace />
       },
       {
         path: '/home',
