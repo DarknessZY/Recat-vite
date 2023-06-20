@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import Siderbar from './menu/index'
@@ -13,7 +13,6 @@ const BasicLayout = () => {
     setCollapsed(!collapsed)
   }
   const { width } = useWindowSize()
-
   useEffect(() => {
     if (width < 720) {
       setCollapsed(true)
@@ -50,7 +49,10 @@ const BasicLayout = () => {
       </Sider>
       <Layout style={{ display: 'flex', flexDirection: 'column' }}>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <HeaderLayout collapsed={collapsed} onClick={handleCollapsed} />
+          <HeaderLayout
+            collapsed={collapsed}
+            onClick={useCallback(handleCollapsed, [collapsed])}
+          />
         </Header>
         <Content style={{ flex: 1, padding: 10 }}>
           <Outlet />

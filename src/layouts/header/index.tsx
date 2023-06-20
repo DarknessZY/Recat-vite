@@ -5,6 +5,7 @@ import { Avatar, Popover } from 'antd'
 import useUserInfoStore from '@/store/userInfo'
 import styles from './index.module.scss'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import React from 'react'
 
 const Header = (props: { collapsed: any; onClick: any }) => {
   /** 侧边栏是否展开**/
@@ -12,7 +13,6 @@ const Header = (props: { collapsed: any; onClick: any }) => {
   /** 获取当前页面的路径信息*/
   const location = useLocation()
   console.log('location', location)
-
   const breadcrumbNameMap: Record<string, string> = {
     '/': '首页',
     '/home': '首页',
@@ -85,4 +85,4 @@ const Header = (props: { collapsed: any; onClick: any }) => {
   )
 }
 
-export default Header
+export default React.memo(Header)
