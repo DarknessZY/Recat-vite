@@ -1,57 +1,37 @@
-import { lazy } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import type { RouteObject } from 'react-router-dom'
-
-import lazyLoad from './lazyLoad'
-import Layout from '@/layouts/index'
-import IsloginStatus from '@/components/auth/loginStatus'
+import type { RouteObject } from '@/router/interface'
 import Login from '@/views/login'
 
-const Home = lazy(() => import('@/views/home'))
-const About = lazy(() => import('@/views/aboutMy/about'))
-const Study = lazy(() => import('@/views/aboutMy/study'))
-const routes: RouteObject[] = [
-  {
-    path: '/login',
-    element: <Login />
-  },
+// * 导入所有router
+const metaRouters: any = import.meta.glob('./modules/*.tsx', { eager: true })
+export const routerArray: RouteObject[] = []
+Object.keys(metaRouters).forEach((item) => {
+  Object.keys(metaRouters[item]).forEach((key: any) => {
+    console.log(metaRouters[item][key])
+    routerArray.push(...metaRouters[item][key])
+  })
+})
+const rootRouter: RouteObject[] = [
   {
     path: '/',
-    element: (
-      <IsloginStatus>
-        <Layout />
-      </IsloginStatus>
-    ),
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/home" replace />
-      },
-      {
-        path: '/home',
-        element: lazyLoad(Home)
-      },
-      {
-        path: '/about',
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/about/study" replace />
-          },
-          {
-            path: 'study',
-            element: lazyLoad(Study)
-          },
-          {
-            path: 'aboutMy',
-            element: lazyLoad(About)
-          }
-        ]
-      }
-    ]
+    element: <Navigate to="/login" />
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    meta: {
+      requiresAuth: false,
+      title: '登录页',
+      key: 'login'
+    }
+  },
+  ...routerArray,
+  {
+    path: '*',
+    element: <Navigate to="/404" />
   }
 ]
 
-export default createBrowserRouter(routes, {
+export default createBrowserRouter(rootRouter, {
   basename: '/'
 })
