@@ -5,6 +5,9 @@ import { HomeFilled } from '@ant-design/icons'
 import { routerArray } from '@/router'
 import { searchRoute } from '@/utils/util'
 import { tabsListStore } from '@/store'
+
+import MoreButton from './components/MoreButton'
+import styles from './index.module.scss'
 const LayoutTabs = () => {
   const { TabPane } = Tabs
   const { pathname } = useLocation()
@@ -48,8 +51,9 @@ const LayoutTabs = () => {
 
   return (
     <>
-      <div className="tabs">
+      <div className={styles.tabs}>
         <Tabs
+          size="small"
           animated
           activeKey={activeValue}
           onChange={clickTabs}
@@ -74,6 +78,11 @@ const LayoutTabs = () => {
             )
           })}
         </Tabs>
+        <MoreButton
+          tabsList={tabsList}
+          setTabsList={setTabsList}
+          delTabs={delTabs}
+        ></MoreButton>
       </div>
     </>
   )

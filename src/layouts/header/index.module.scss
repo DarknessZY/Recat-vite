@@ -9,6 +9,10 @@
     display: flex;
     align-items: center;
     justify-content: start;
+
+    .leftItem {
+      margin-left: 10px;
+    }
   }
 
   .right {

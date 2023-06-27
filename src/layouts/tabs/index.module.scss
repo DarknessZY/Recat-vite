@@ -1,0 +1,68 @@
+.tabs {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #fff !important;
+  padding: 0 10px 0 0px;
+
+  :global(.ant-tabs) {
+    background: #fff !important;
+
+    :global(.ant-tabs-nav) {
+      margin: 0;
+
+      &::before {
+        border: none;
+      }
+      :global(.ant-tabs-ink-bar) {
+        visibility: visible;
+      }
+      :global(.ant-tabs-tab-with-remove.ant-tabs-tab-active) {
+        :global(.ant-tabs-tab-remove) {
+          top: 1px;
+          margin: 1px;
+          color: red !important;
+          opacity: 1 !important;
+        }
+        :global(.ant-tabs-tab-btn) {
+          transform: translateX(-9px);
+        }
+      }
+      :global(.ant-tabs-tab) {
+        padding: 8px 22px;
+        color: #cccccc;
+        background: none;
+        border: none;
+        transition: none;
+        :global(.anticon-home) {
+          margin-right: 7px;
+        }
+        :global(.ant-tabs-tab-remove) {
+          position: absolute;
+          right: 0;
+          color: #cccccc;
+          opacity: 0;
+          transition: 0.1s ease-in-out;
+        }
+      }
+      :global(.ant-tabs-tab.ant-tabs-tab-with-remove) {
+        &:hover {
+          :global(.ant-tabs-tab-remove) {
+            top: 1px;
+            margin: 1px;
+            opacity: 1;
+            transition: 0.1s ease-in-out;
+            color: red;
+          }
+          :global(.ant-tabs-tab-btn) {
+            transform: translateX(-9px);
+          }
+        }
+      }
+    }
+  }
+
+  .moreButton {
+    font-size: 12px;
+  }
+}

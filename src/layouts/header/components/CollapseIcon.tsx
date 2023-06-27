@@ -36,7 +36,7 @@ const CollapsedIcon = (props: { collapsed: any; onClick: any }) => {
       <div onClick={onClick}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </div>
-      <div>
+      <div className={styles.leftItem}>
         {pathSnippets[0] == 'home' ? (
           ''
         ) : (

@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import Siderbar from './menu/index'
 import HeaderLayout from './header'
+import TabLayout from './tabs/index'
 import useWindowSize from '@/hooks/useWindowSize'
 import reactImg from '@/assets/react.svg'
 const { Header, Sider, Content } = Layout
@@ -53,8 +54,19 @@ const BasicLayout = () => {
             collapsed={collapsed}
             onClick={useCallback(handleCollapsed, [collapsed])}
           />
+          <TabLayout />
         </Header>
-        <Content style={{ flex: 1, padding: 10 }}>
+        <Content
+          style={{
+            flex: 1,
+            marginTop: 60,
+            marginLeft: 20,
+            marginBottom: 20,
+            marginRight: 20,
+            background: '#fff',
+            padding: 10
+          }}
+        >
           <Outlet />
         </Content>
       </Layout>
