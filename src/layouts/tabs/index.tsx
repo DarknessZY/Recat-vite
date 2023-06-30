@@ -9,11 +9,12 @@ import { tabsListStore } from '@/store'
 import MoreButton from './components/MoreButton'
 import styles from './index.module.scss'
 const LayoutTabs = () => {
-  const { TabPane } = Tabs
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const [activeValue, setActiveValue] = useState<string>(pathname)
   const { tabsList, setTabsList } = tabsListStore()
+  /** message提示推荐的是顶层注册的方式*/
+  const [messageApi, contextHolder] = message.useMessage()
   useEffect(() => {
     addTabs()
   }, [pathname])
@@ -45,12 +46,13 @@ const LayoutTabs = () => {
         navigate(nextTab.path)
       })
     }
-    message.success('你删除了Tabs标签 😆😆😆')
+    messageApi.success('你删除了Tabs标签 😆😆😆')
     setTabsList(tabsList.filter((item: any) => item.path !== tabPath))
   }
 
   return (
     <>
+      {contextHolder}
       <div className={styles.tabs}>
         <Tabs
           size="small"
@@ -62,22 +64,19 @@ const LayoutTabs = () => {
           onEdit={(path) => {
             delTabs(path as string)
           }}
-        >
-          {tabsList.map((item: any) => {
-            return (
-              <TabPane
-                key={item.path}
-                tab={
-                  <span>
-                    {item.path == '/home' ? <HomeFilled /> : ''}
-                    {item.title}
-                  </span>
-                }
-                closable={item.path !== '/home'}
-              ></TabPane>
-            )
+          items={tabsList.map((item: any) => {
+            return {
+              label: (
+                <span>
+                  {item.path == '/home' ? <HomeFilled /> : ''}
+                  {item.title}
+                </span>
+              ),
+              key: item.path,
+              closable: item.path !== '/home'
+            }
           })}
-        </Tabs>
+        ></Tabs>
         <MoreButton
           tabsList={tabsList}
           setTabsList={setTabsList}
