@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import DraggablePractice from './practice/DraggablePractice'
-import ZustandPractice from './practice/zustandPractice'
+import ZustandPractice from './practice/ZustandPractice'
 import CssPractice from './practice/CssPractice'
 const Home = () => {
   return (
